@@ -1,11 +1,12 @@
-<!--<script setup>-->
-<!--import { RouterLink, RouterView } from 'vue-router'-->
-<!--import HelloWorld from './components/HelloWorld.vue'-->
-<!--</script>-->
-
 <template>
   <header>
     <nav>
+      <ul>
+        <li><router-link to="/">Главная</router-link></li>
+        <li><router-link to="/user">Профиль</router-link></li>
+        <li><router-link to="/types_of_activity">Виды активностей</router-link></li>
+        <li><router-link to="/activities">Активности</router-link></li>
+      </ul>
       <div v-if="isAuthenticated && user">
         Привет, {{ user.name }}
         <button @click="logout">Выйти</button>
@@ -26,7 +27,7 @@
       </div>
     </nav>
   </header>
-<!--  <RouterView />-->
+  <router-view></router-view>
 </template>
 
 <script>
@@ -42,7 +43,7 @@ export default {
   },
   computed: {
     isAuthenticated() {
-      return this.authStore.isAuthenticated();
+      return this.authStore.isAuthenticated;
     },
     user() {
       return this.authStore.user;
