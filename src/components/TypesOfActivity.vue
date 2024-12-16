@@ -14,17 +14,36 @@
       <Column field="id" header="№"/>
       <Column field="type_of_activity_name" header="Наименование вида активности"/>
       <Column field="maximum_score" header="Максимальный результат"/>
+      <Column field="picture_url" header="Лого">
+        <template #body="slotProps">
+          <img
+              :src="slotProps.data.picture_url"
+              alt="Лого"
+              style="width: 100px; height: auto; border-radius: 4px;"
+          />
+        </template>
+      </Column>
+      <template #footer>
+        <div class="text-end">
+          <PrimeButton type="button"
+                  @click="this.$router.push('/create_type_of_activity')"
+                  icon="pi pi-plus"
+                  label="Создать вид активности"
+          />
+        </div>
+      </template>
   </DataTable>
 </template>
 
 <script>
   import DataTable from "primevue/datatable";
   import Column from "primevue/column";
+  import {Button} from "primevue";
   import { useDataStore } from "@/stores/dataStore.js";
 
   export default {
     name: "TypeOfActivity",
-    components: {DataTable, Column},
+    components: {DataTable, Column, PrimeButton: Button},
     data() {
       return {
         dataStore: useDataStore(),

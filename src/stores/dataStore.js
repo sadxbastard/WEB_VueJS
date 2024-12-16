@@ -9,6 +9,7 @@ export const useDataStore = defineStore('data', {
        types_of_activity_total: null,
        activities: [],
        activities_total: null,
+       errorCode: "",
        errorMessage: "",
    }),
    actions: {
@@ -108,5 +109,31 @@ export const useDataStore = defineStore('data', {
                }
            }
        },
+       async create_type_of_activity(formData){
+           this.errorMesage = "";
+           try{
+               const response = await axios.post(backendUrl + "/type_of_activity", formData, {
+                   headers: {
+                       'Content-Type': 'multipart/form-data',
+                       Authorization: 'Bearer ' + localStorage.getItem('token')
+                   }
+               });
+               this.errorCode = response.data.code;
+               this.errorMessage = response.data.message;
+           } catch (error) {
+               if (error.response) {
+                   this.errorCode = 11;
+                   this.errorMesage = error.response.data.message;
+                   console.log(error);
+               } else if (error.request) {
+                   this.errorCode = 12;
+                   this.errorMesage = error.message;
+                   console.log(error);
+               } else {
+                   this.errorCode = 13;
+                   console.log(error);
+               }
+           }
+       }
    },
 });
