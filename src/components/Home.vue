@@ -4,7 +4,7 @@
 
 <template>
   <div class="home-page">
-    <h1>Здесь находится основная информация</h1>
+    <h1>Главная страница</h1>
   </div>
 </template>
 
