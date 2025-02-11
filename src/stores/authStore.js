@@ -32,7 +32,6 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async getUser() {
-      axios.defaults.withCredentials = true;
       this.errorMessage = "";
       try {
         const response = await axios.get(backendUrl + '/user',
